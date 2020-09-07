@@ -16,8 +16,11 @@
 ## Options参数设置
 
 set_prepend_classpath：引入必须的Java类
+
 set_allow_phantom_refs：允许外部的引用（未引入soot的引用）
+
 set_soot_classpath：设置待分析的Java类文件的目录
+
 set_process_dir：设置argument classes的目录
 
 ```java
@@ -32,12 +35,20 @@ Options.v().set_keep_line_number(true);
 Scene.v().loadNecessaryClasses();
 ```
 
+## SootClass结构
+
+![](./img/sootClass.png)
+
 ## 常见错误
 
 `Exception in thread "main" java.lang.Error: Error: Failed to load java.lang.CharSequence.`
+
 不能使用Java 8解析Java文件，因为字符串等内部类做了改动，可以改为Java 7
 
+或者使用编译好的字节码文件
+
 `Exception in thread "main" soot.SootResolver$SootClassNotFoundException: couldn't find class:...`
+
 检查Options参数设置
 
 ## 参考资料
