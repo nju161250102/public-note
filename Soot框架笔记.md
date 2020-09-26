@@ -41,15 +41,47 @@ Scene.v().loadNecessaryClasses();
 
 ## 常见错误
 
-`Exception in thread "main" java.lang.Error: Error: Failed to load java.lang.CharSequence.`
+### `Exception in thread "main" java.lang.Error: Error: Failed to load java.lang.CharSequence.`
 
 不能使用Java 8解析Java文件，因为字符串等内部类做了改动，可以改为Java 7
 
 或者使用编译好的字节码文件
 
-`Exception in thread "main" soot.SootResolver$SootClassNotFoundException: couldn't find class:...`
+**【重要】解决方法**
+
+[fix bug in analyzing source code, fixes](https://github.com/soot-oss/soot/pull/1384)
+
+使用`develop`分支：
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.soot-oss</groupId>
+    <artifactId>soot</artifactId>
+    <version>4.3.0-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+<repositories>
+  <repository>
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+          <enabled>false</enabled>
+      </releases>
+  </repository>
+</repositories>	
+```
+
+如果找不到仓库，检查`settings.xml`中的配置，参见[CSDN - pom.xml中引入repository无效](https://blog.csdn.net/qq_32094503/article/details/100557689)
+
+
+### `Exception in thread "main" soot.SootResolver$SootClassNotFoundException: couldn't find class:...`
 
 检查Options参数设置
+
+### `SootMethod.getActiveBody()`得不到结果
+
+使用`retrieveActiveBody`方法手动生成
 
 ## 参考资料
 
